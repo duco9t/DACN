@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./style.scss";
 import SuccessComponent from "../../../../component/general/Success";
+import "./style.scss";
 
 const UpdateUser = () => {
   const [message, setMessage] = useState("");
@@ -28,7 +28,7 @@ const UpdateUser = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3001/api/user/update-user/${id}`,
+        `https://doanpro-production.up.railway.app/api/user/update-user/${id}`,
         {
           method: "PUT",
           headers: {

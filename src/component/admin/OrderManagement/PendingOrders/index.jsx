@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../../middleware/UserContext";
-import "../style.scss";
 import { AiOutlineDownCircle } from "react-icons/ai";
+import { UserContext } from "../../../../middleware/UserContext";
 import SuccessAnimation from "../../../general/Success";
+import "../style.scss";
 
 const PendingOrdersAdmin = () => {
   const [orders, setOrders] = useState([]);
@@ -18,7 +18,7 @@ const PendingOrdersAdmin = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3001/api/order/getAll`);
+      const response = await fetch(`https://doanpro-production.up.railway.app/api/order/getAll`);
       if (!response.ok) {
         throw new Error("Failed to fetch orders");
       }
@@ -43,7 +43,7 @@ const PendingOrdersAdmin = () => {
 
   const handleSubmidOrder = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/order/ship`, {
+      const response = await fetch(`https://doanpro-production.up.railway.app/api/order/ship`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -69,7 +69,7 @@ const PendingOrdersAdmin = () => {
   };
   const handleCancelOrder = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/order/cancel`, {
+      const response = await fetch(`https://doanpro-production.up.railway.app/api/order/cancel`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -174,7 +174,7 @@ const PendingOrdersAdmin = () => {
                             <td>
                               {" "}
                               {parseInt(item?.productId?.prices) ==
-                              item?.productId?.promotionPrice ? (
+                                item?.productId?.promotionPrice ? (
                                 <div className="grp-price">
                                   <p className="prices">
                                     {`${parseInt(item?.productId?.prices).toLocaleString("vi-VN")} ₫`}

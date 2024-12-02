@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 import { useLocation } from "react-router-dom";
-import { UserContext } from "../../../middleware/UserContext";
+import HistoriesProductSlide from "../../../component/user/historiesProdcutSlide";
 import Notification, {
   NotificationContainer
 } from "../../../component/user/Notification";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
 import ProductsSlideComponent from "../../../component/user/productSlide";
 import ReviewSection from "../../../component/user/ReviewProduct";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { UserContext } from "../../../middleware/UserContext";
 import "./style.scss";
-import HistoriesProductSlide from "../../../component/user/historiesProdcutSlide";
 
 const ProductDetailsPage = () => {
   const location = useLocation();
@@ -42,7 +42,7 @@ const ProductDetailsPage = () => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/product/get-details/${productId}`
+        `https://doanpro-production.up.railway.app/api/product/get-details/${productId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch product-details");
@@ -69,7 +69,7 @@ const ProductDetailsPage = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3001/api/cart/add-update",
+        "https://doanpro-production.up.railway.app/api/cart/add-update",
         {
           method: "POST",
           headers: {

@@ -1,15 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   AiOutlineClose,
   AiOutlineEye,
   AiOutlineEyeInvisible
 } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 import { UserContext } from "../../../../middleware/UserContext";
 import SignUp from "../signup/Signup";
 import "./style.scss";
-import { Link } from "react-router-dom";
 
 const Login = ({ isShowLoginForm, closeLoginForm }) => {
   const { updateUser } = useContext(UserContext);
@@ -46,7 +45,7 @@ const Login = ({ isShowLoginForm, closeLoginForm }) => {
     }
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/api/user/sign-in", {
+      const response = await fetch("https://doanpro-production.up.railway.app/api/user/sign-in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -82,7 +81,7 @@ const Login = ({ isShowLoginForm, closeLoginForm }) => {
     }
   };
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:3001/auth/google";
+    window.location.href = "https://doanpro-production.up.railway.app/auth/google";
   };
   if (!isShowLoginForm) return null;
 
@@ -116,7 +115,7 @@ const Login = ({ isShowLoginForm, closeLoginForm }) => {
           </span>
         </div>
         <span className="forget-pass">
-          <span onClick={() => {}}>Quên mật khẩu</span>
+          <span onClick={() => { }}>Quên mật khẩu</span>
         </span>
         <button onClick={onHandlLogIn} disabled={isLoading}>
           {isLoading ? "Đang xử lý..." : "Đăng nhập"}

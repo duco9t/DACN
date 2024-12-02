@@ -1,13 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import {
+  AiOutlineDownCircle
+} from "react-icons/ai";
 import { UserContext } from "../../../../../middleware/UserContext";
 import "../style.scss";
-import {
-  AiOutlineDown,
-  AiOutlineDownCircle,
-  AiOutlineDownSquare,
-  AiOutlineEye,
-  AiOutlineEyeInvisible
-} from "react-icons/ai";
 const CancelledOrders = () => {
   const [orders, setOrders] = useState([]);
   const { user } = useContext(UserContext) || {};
@@ -30,7 +26,7 @@ const CancelledOrders = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:3001/api/order/getAll/${userId}`
+          `https://doanpro-production.up.railway.app/api/order/getAll/${userId}`
         );
 
         if (!response.ok) {
@@ -117,7 +113,7 @@ const CancelledOrders = () => {
                             <td>
                               {" "}
                               {parseInt(item?.productId?.prices) ==
-                              item?.productId?.promotionPrice ? (
+                                item?.productId?.promotionPrice ? (
                                 <div className="grp-price">
                                   <p className="prices">
                                     {`${parseInt(item?.productId?.prices).toLocaleString("vi-VN")} ₫`}

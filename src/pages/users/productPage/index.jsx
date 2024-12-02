@@ -1,19 +1,18 @@
-import "./style.scss";
 import { memo, useContext, useEffect, useState } from "react";
-import { ROUTERS } from "../../../utils/router";
-import Breadcrumb from "../theme/breadcrumb";
-import { AiOutlineClose } from "react-icons/ai";
-import { AiOutlineSearch } from "react-icons/ai";
-import { Link, useLocation } from "react-router-dom";
+import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { BsDeviceSsdFill } from "react-icons/bs";
-import { PiFrameCornersBold } from "react-icons/pi";
 import { FaMemory } from "react-icons/fa";
+import { PiFrameCornersBold } from "react-icons/pi";
 import { RiCpuLine } from "react-icons/ri";
-import { UserContext } from "../../../middleware/UserContext";
+import { Link, useLocation } from "react-router-dom";
+import LoadingSpinner from "../../../component/general/LoadingSpinner";
 import Notification, {
   NotificationContainer
 } from "../../../component/user/Notification";
-import LoadingSpinner from "../../../component/general/LoadingSpinner";
+import { UserContext } from "../../../middleware/UserContext";
+import { ROUTERS } from "../../../utils/router";
+import Breadcrumb from "../theme/breadcrumb";
+import "./style.scss";
 
 const ProductPage = () => {
   const { notifications, addNotification } = NotificationContainer();
@@ -30,7 +29,7 @@ const ProductPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
 
@@ -52,7 +51,7 @@ const ProductPage = () => {
     if (!user) alert("Vui lòng đăng nhập");
     try {
       const response = await fetch(
-        "http://localhost:3001/api/cart/add-update",
+        "https://doanpro-production.up.railway.app/api/cart/add-update",
         {
           method: "POST",
           headers: {
@@ -374,7 +373,7 @@ const ProductPage = () => {
                               </div>
                               <div className="grp-price">
                                 {product?.prices ==
-                                parseInt(product?.promotionPrice) ? (
+                                  parseInt(product?.promotionPrice) ? (
                                   <p className="price">
                                     {parseInt(
                                       parseInt(product?.promotionPrice)
@@ -462,7 +461,7 @@ const ProductPage = () => {
           <Notification
             key={notification.id}
             message={notification.message}
-            onClose={() => {}}
+            onClose={() => { }}
           />
         ))}
       </div>

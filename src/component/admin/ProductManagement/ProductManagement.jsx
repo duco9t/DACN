@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IMAGES } from "../../../assets/image";
-import { ROUTERS } from "../../../utils/router";
-import { UserContext } from "../../../middleware/UserContext";
 import { NotificationContext } from "../../../middleware/NotificationContext";
-import "./style.scss";
+import { UserContext } from "../../../middleware/UserContext";
+import { ROUTERS } from "../../../utils/router";
 import SuccessAnimation from "../../general/Success";
+import "./style.scss";
 
 const ProductManagement = () => {
   const { addNotification } = useContext(NotificationContext);
@@ -19,7 +19,7 @@ const ProductManagement = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
         const data = await response.json();
@@ -36,7 +36,7 @@ const ProductManagement = () => {
     if (window.confirm("Bạn có chắc chắn muốn xoá sản phẩm này?")) {
       try {
         const response = await fetch(
-          `http://localhost:3001/api/product/delete-product/${id}`,
+          `https://doanpro-production.up.railway.app/api/product/delete-product/${id}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" }

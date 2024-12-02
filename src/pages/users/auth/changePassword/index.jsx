@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
-import "./style.scss";
-import { UserContext } from "../../../../middleware/UserContext";
+import React, { useContext, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { UserContext } from "../../../../middleware/UserContext";
+import "./style.scss";
 
 const ChangePassword = () => {
   const { user } = useContext(UserContext);
@@ -36,7 +36,7 @@ const ChangePassword = () => {
     const id = user.dataUser.id;
     try {
       const response = await fetch(
-        `http://localhost:3001/api/user/change-password/${id}`,
+        `https://doanpro-production.up.railway.app/api/user/change-password/${id}`,
         {
           method: "PUT",
           headers: {

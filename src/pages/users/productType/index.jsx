@@ -1,18 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-import "./style.scss";
-import { ROUTERS } from "../../../utils/router";
+import { useContext, useEffect, useState } from "react";
+import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { BsDeviceSsdFill } from "react-icons/bs";
-import { PiFrameCornersBold } from "react-icons/pi";
 import { FaMemory } from "react-icons/fa6";
+import { PiFrameCornersBold } from "react-icons/pi";
 import { RiCpuLine } from "react-icons/ri";
-import { UserContext } from "../../../middleware/UserContext";
-import Breadcrumb from "../theme/breadcrumb";
-import { AiOutlineClose } from "react-icons/ai";
+import { Link, useLocation } from "react-router-dom";
 import Notification, {
   NotificationContainer
 } from "../../../component/user/Notification";
+import { UserContext } from "../../../middleware/UserContext";
+import { ROUTERS } from "../../../utils/router";
+import Breadcrumb from "../theme/breadcrumb";
+import "./style.scss";
 
 const ProductType = () => {
   const location = useLocation();
@@ -37,7 +36,7 @@ const ProductType = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
 
@@ -178,7 +177,7 @@ const ProductType = () => {
     if (!user) alert("Vui lòng đăng nhập");
     try {
       const response = await fetch(
-        "http://localhost:3001/api/cart/add-update",
+        "https://doanpro-production.up.railway.app/api/cart/add-update",
         {
           method: "POST",
           headers: {
@@ -380,7 +379,7 @@ const ProductType = () => {
                               </div>
                               <div className="grp-price">
                                 {product?.prices ==
-                                parseInt(product?.promotionPrice) ? (
+                                  parseInt(product?.promotionPrice) ? (
                                   <p className="price">
                                     {parseInt(
                                       product?.promotionPrice
@@ -466,7 +465,7 @@ const ProductType = () => {
           <Notification
             key={notification.id}
             message={notification.message}
-            onClose={() => {}}
+            onClose={() => { }}
           />
         ))}
       </div>

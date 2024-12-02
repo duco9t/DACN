@@ -1,13 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import {
+  AiOutlineDownCircle
+} from "react-icons/ai";
 import { UserContext } from "../../../../middleware/UserContext";
 import "../style.scss";
-import {
-  AiOutlineDown,
-  AiOutlineDownCircle,
-  AiOutlineDownSquare,
-  AiOutlineEye,
-  AiOutlineEyeInvisible
-} from "react-icons/ai";
 const CancelledOrdersAdmin = () => {
   const [orders, setOrders] = useState([]);
   const { user } = useContext(UserContext) || {};
@@ -28,7 +24,7 @@ const CancelledOrdersAdmin = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:3001/api/order/getAll`);
+        const response = await fetch(`https://doanpro-production.up.railway.app/api/order/getAll`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
@@ -114,7 +110,7 @@ const CancelledOrdersAdmin = () => {
                             <td>
                               {" "}
                               {parseInt(item?.productId?.prices) ==
-                              item?.productId?.promotionPrice ? (
+                                item?.productId?.promotionPrice ? (
                                 <div className="grp-price">
                                   <p className="prices">
                                     {`${parseInt(item?.productId?.prices).toLocaleString("vi-VN")} ₫`}

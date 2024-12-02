@@ -1,14 +1,14 @@
-import { memo, useContext, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import "./style.scss";
 
 import { Outlet } from "react-router-dom";
-import { UserProvider, UserContext } from "../../../../middleware/UserContext";
+import ChatbotWrapper from "../../../../component/general/ChatBox";
+import LoadingSpinner from "../../../../component/general/LoadingSpinner";
+import NotFoundPage from "../../../../component/general/NotFoundPage";
+import { UserProvider } from "../../../../middleware/UserContext";
 import SideBarProfile from "../../../../pages/users/profilePage/sidebarProfile";
 import Footer from "../footer";
 import Header from "../header";
-import ChatbotWrapper from "../../../../component/general/ChatBox";
-import NotFoundPage from "../../../../component/general/NotFoundPage";
-import LoadingSpinner from "../../../../component/general/LoadingSpinner";
 
 const ProfilePageLayout = (props) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -25,7 +25,7 @@ const ProfilePageLayout = (props) => {
           return;
         }
 
-        const response = await fetch("http://localhost:3001/api/check/user", {
+        const response = await fetch("https://doanpro-production.up.railway.app/api/check/user", {
           headers: {
             Authorization: `Bearer ${token}`
           }

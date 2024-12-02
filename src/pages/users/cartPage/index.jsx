@@ -1,11 +1,11 @@
-import "./style.scss";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import React, { useContext, useEffect, useState, useCallback } from "react";
-import { UserContext } from "../../../middleware/UserContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ROUTERS } from "../../../utils/router";
 import LoadingSpinner from "../../../component/general/LoadingSpinner";
 import SuccessAnimation from "../../../component/general/Success";
+import { UserContext } from "../../../middleware/UserContext";
+import { ROUTERS } from "../../../utils/router";
+import "./style.scss";
 
 const CartPage = () => {
   const [cart, setCart] = useState(null);
@@ -36,7 +36,7 @@ const CartPage = () => {
     const idUser = user.dataUser.id;
     try {
       const response = await fetch(
-        `http://localhost:3001/api/cart/get-cart/${idUser}`
+        `https://doanpro-production.up.railway.app/api/cart/get-cart/${idUser}`
       );
       if (!response.ok) throw new Error(response.statusText);
       const dataCart = await response.json();
@@ -59,7 +59,7 @@ const CartPage = () => {
   const removeFromCart = async (productId, userID) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/cart/delete-product-cart/${userID}/product/${productId}`,
+        `https://doanpro-production.up.railway.app/api/cart/delete-product-cart/${userID}/product/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -90,7 +90,7 @@ const CartPage = () => {
     }
     try {
       const response = await fetch(
-        `http://localhost:3001/api/cart/delete-cart/${userID}`,
+        `https://doanpro-production.up.railway.app/api/cart/delete-cart/${userID}`,
         {
           method: "DELETE",
           headers: {
@@ -120,7 +120,7 @@ const CartPage = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3001/api/cart/add-update",
+        "https://doanpro-production.up.railway.app/api/cart/add-update",
         {
           method: "POST",
           headers: {
@@ -150,7 +150,7 @@ const CartPage = () => {
 
   const handleDecrease = async (id) => {
     try {
-      const response = await fetch("http://localhost:3001/api/cart/update", {
+      const response = await fetch("https://doanpro-production.up.railway.app/api/cart/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -230,7 +230,7 @@ const CartPage = () => {
                     <td>
                       {" "}
                       {parseInt(item?.productId?.prices) ==
-                      item?.productId?.promotionPrice ? (
+                        item?.productId?.promotionPrice ? (
                         <div className="grp-price">
                           <p className="prices">
                             {`${parseInt(item?.productId?.prices).toLocaleString("vi-VN")} ₫`}

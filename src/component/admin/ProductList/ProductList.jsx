@@ -10,7 +10,7 @@ const ProductList = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
         const data = await response.json();

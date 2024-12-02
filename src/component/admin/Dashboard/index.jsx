@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./style.scss";
 import { Link } from "react-router-dom";
 import { ROUTERS } from "../../../utils/router";
 import RevenueStatistics from "../RevenueStatistics";
+import "./style.scss";
 
 const Dashboard = () => {
   const [totalRevenue, setTotalRevenue] = useState(0);
@@ -11,7 +11,7 @@ const Dashboard = () => {
     const fetchTotalRevenue = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/order/total-revenue"
+          "https://doanpro-production.up.railway.app/api/order/total-revenue"
         );
         if (!response.ok) throw new Error("Lỗi khi fetch dữ liệu");
 
@@ -55,14 +55,14 @@ const Dashboard = () => {
   const [reviewCount, setReviewCount] = useState(0);
 
   useEffect(() => {
-    fetchCount("http://localhost:3001/api/user/getAllUser", setUserCount);
-    fetchCount("http://localhost:3001/api/order/getAll", setOrderCount);
+    fetchCount("https://doanpro-production.up.railway.app/api/user/getAllUser", setUserCount);
+    fetchCount("https://doanpro-production.up.railway.app/api/order/getAll", setOrderCount);
     fetchCount(
-      "http://localhost:3001/api/product/getAllProduct",
+      "https://doanpro-production.up.railway.app/api/product/getAllProduct",
       setProductCount
     );
     fetchCount(
-      "http://localhost:3001/api/review/reviews/count",
+      "https://doanpro-production.up.railway.app/api/review/reviews/count",
       setReviewCount
     );
   }, []);

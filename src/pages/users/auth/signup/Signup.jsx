@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   AiOutlineClose,
   AiOutlineEye,
   AiOutlineEyeInvisible
 } from "react-icons/ai";
-import "./style.scss";
 import VerifyOtp from "../VerifyOtp";
 import Login from "../login/Login";
-import ReCAPTCHA from "react-google-recaptcha";
+import "./style.scss";
 
 const SignUp = ({ isShowSignUpForm, closeSignUpForm }) => {
   const [capVal, setCapVal] = useState(null);
@@ -51,7 +51,7 @@ const SignUp = ({ isShowSignUpForm, closeSignUpForm }) => {
     //   return setMessage("Mật khẩu không trùng nhau");
 
     try {
-      const response = await fetch("http://localhost:3001/api/user/sign-up", {
+      const response = await fetch("https://doanpro-production.up.railway.app/api/user/sign-up", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import "./style.scss";
 import { ROUTERS } from "../../../../utils/router";
+import "./style.scss";
 
 const VerifyOtp = ({ email, isShowVerifyForm, closeVerifyForm }) => {
   const [otpToken, setOtpToken] = useState("");
@@ -14,7 +14,7 @@ const VerifyOtp = ({ email, isShowVerifyForm, closeVerifyForm }) => {
 
   const handleVerify = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/otp/verify-otp", {
+      const response = await fetch("https://doanpro-production.up.railway.app/api/otp/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otpToken })

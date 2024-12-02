@@ -1,8 +1,7 @@
-import "./styleSlide.scss";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ROUTERS } from "../../../utils/router";
-import { IMAGES } from "../../../assets/image";
+import "./styleSlide.scss";
 
 const ProductsSlideComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,7 +11,7 @@ const ProductsSlideComponent = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
 

@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import "./style.scss";
+import React, { useEffect, useRef, useState } from "react";
 import { AiFillWechat } from "react-icons/ai";
+import "./style.scss";
 
 const ChatbotWrapper = () => {
   const messagesEndRef = useRef(null);
@@ -27,7 +27,7 @@ const ChatbotWrapper = () => {
     ]);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/get_response", {
+      const response = await fetch("https://chatbothk7-production.up.railway.app/api/get_response", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message })

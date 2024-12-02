@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
-import "./style.scss";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ROUTERS } from "../../../utils/router";
 import { UserContext } from "../../../middleware/UserContext";
+import { ROUTERS } from "../../../utils/router";
+import "./style.scss";
 const StaffManagement = () => {
   const [dataUser, setDataUser] = useState([]);
   const { user } = useContext(UserContext);
@@ -10,7 +10,7 @@ const StaffManagement = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/user/getAllUser"
+          "https://doanpro-production.up.railway.app/api/user/getAllUser"
         );
 
         if (!response.ok) {
@@ -40,7 +40,7 @@ const StaffManagement = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/api/user/delete-user/${id}`,
+        `https://doanpro-production.up.railway.app/api/user/delete-user/${id}`,
         {
           method: "DELETE",
           headers: {

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import "./style.scss";
-import { UserContext } from "../../../middleware/UserContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { UserContext } from "../../../middleware/UserContext";
 import { ROUTERS } from "../../../utils/router";
 import SuccessAnimation from "../../general/Success";
+import "./style.scss";
 
 const AddReview = () => {
   const { user } = useContext(UserContext) || {};
@@ -28,7 +28,7 @@ const AddReview = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:3001/api/product/get-details/${productId}`
+          `https://doanpro-production.up.railway.app/api/product/get-details/${productId}`
         );
 
         if (!response.ok) {
@@ -62,7 +62,7 @@ const AddReview = () => {
     const username = user?.dataUser?.name;
     try {
       const response = await fetch(
-        `http://localhost:3001/api/review/${productId}/add-review/${userId}`,
+        `https://doanpro-production.up.railway.app/api/review/${productId}/add-review/${userId}`,
         {
           method: "POST",
           headers: {

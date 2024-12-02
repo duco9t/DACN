@@ -1,12 +1,7 @@
-import "./styleGrid.scss";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { RiCpuLine } from "react-icons/ri";
-import { BsDeviceSsdFill } from "react-icons/bs";
-import { PiFrameCornersBold } from "react-icons/pi";
-import { FaMemory } from "react-icons/fa";
-import { ROUTERS } from "../../../utils/router";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../middleware/UserContext";
+import "./styleGrid.scss";
 const ProductsGridComponent = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -16,7 +11,7 @@ const ProductsGridComponent = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
 
@@ -34,7 +29,7 @@ const ProductsGridComponent = () => {
     if (!user) alert("Vui lòng đăng nhập");
     try {
       const response = await fetch(
-        "http://localhost:3001/api/cart/add-update",
+        "https://doanpro-production.up.railway.app/api/cart/add-update",
         {
           method: "POST",
           headers: {

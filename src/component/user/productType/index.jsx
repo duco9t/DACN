@@ -1,8 +1,8 @@
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import "./style.scss";
-import { ROUTERS } from "../../../utils/router";
 import { UserContext } from "../../../middleware/UserContext";
+import { ROUTERS } from "../../../utils/router";
+import "./style.scss";
 
 const ProductTypeComponent = ({ title, heading }) => {
   const [products, setProducts] = useState([]);
@@ -15,7 +15,7 @@ const ProductTypeComponent = ({ title, heading }) => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
         const data = await response.json();
@@ -104,7 +104,7 @@ const ProductTypeComponent = ({ title, heading }) => {
     if (!user) alert("Vui lòng đăng nhập");
     try {
       const response = await fetch(
-        "http://localhost:3001/api/cart/add-update",
+        "https://doanpro-production.up.railway.app/api/cart/add-update",
         {
           method: "POST",
           headers: {

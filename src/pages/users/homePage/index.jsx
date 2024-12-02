@@ -1,13 +1,12 @@
-import { memo, useState, useEffect, useContext } from "react";
-import "./style.scss";
-import { AiOutlineRight, AiOutlinePhone } from "react-icons/ai";
+import { memo, useContext, useEffect, useState } from "react";
+import { AiOutlinePhone } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { ROUTERS } from "../../../utils/router";
-import ProductsSlideComponent from "../../../component/user/productSlide/index";
-import SlideBanner from "../../../component/user/slideBaner";
-import { UserContext } from "../../../middleware/UserContext";
 import LoadingSpinner from "../../../component/general/LoadingSpinner";
 import ProductTypeComponent from "../../../component/user/productType";
+import SlideBanner from "../../../component/user/slideBaner";
+import { UserContext } from "../../../middleware/UserContext";
+import { ROUTERS } from "../../../utils/router";
+import "./style.scss";
 
 const HomePage = () => {
   const navigator = useNavigate();
@@ -21,7 +20,7 @@ const HomePage = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
 

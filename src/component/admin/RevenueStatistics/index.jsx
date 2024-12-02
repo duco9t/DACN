@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip
+} from "chart.js";
+import { vi } from "date-fns/locale";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { vi } from "date-fns/locale";
 import "./style.scss";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -46,7 +46,7 @@ const RevenueStatistics = () => {
     const dayOfWeek = vietnamDate.getDay();
     const startDate = new Date(
       vietnamDate.getTime() -
-        (dayOfWeek === 0 ? 6 : dayOfWeek - 1) * 24 * 60 * 60 * 1000
+      (dayOfWeek === 0 ? 6 : dayOfWeek - 1) * 24 * 60 * 60 * 1000
     );
     const endDate = new Date(startDate.getTime() + 6 * 24 * 60 * 60 * 1000);
     return { startDate, endDate };
@@ -77,7 +77,7 @@ const RevenueStatistics = () => {
       }
 
       const response = await fetch(
-        "http://localhost:3001/api/order/getstatus",
+        "https://doanpro-production.up.railway.app/api/order/getstatus",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

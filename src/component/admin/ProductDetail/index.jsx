@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { AiOutlineShoppingCart, AiFillStar } from "react-icons/ai";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import { useLocation } from "react-router-dom";
 import { UserContext } from "../../../middleware/UserContext";
-import "./style.scss";
 import ReviewSection from "../../user/ReviewProduct";
+import "./style.scss";
 
 const ProductDetail = () => {
   const { user, updateCartCount } = useContext(UserContext);
@@ -26,7 +25,7 @@ const ProductDetail = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3001/api/cart/add-update",
+        "https://doanpro-production.up.railway.app/api/cart/add-update",
         {
           method: "POST",
           headers: {

@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
-import "./style.scss";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../../middleware/UserContext";
+import "./style.scss";
 
 const AccountInfo = () => {
   const { user } = useContext(UserContext);
@@ -34,7 +34,7 @@ const AccountInfo = () => {
     const id = user.dataUser.id;
     try {
       const response = await fetch(
-        `http://localhost:3001/api/user/update-user/${id}`,
+        `https://doanpro-production.up.railway.app/api/user/update-user/${id}`,
         {
           method: "PUT",
           headers: {

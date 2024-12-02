@@ -1,15 +1,13 @@
-import "./style.scss";
 import { memo, useEffect, useState } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../../../../component/admin/Sidebar/Sidebar";
-import HeaderAdmin from "../header/header";
-import { UserProvider } from "../../../../middleware/UserContext";
 import { NotificationProvider } from "../../../../middleware/NotificationContext";
-import { ROUTERS } from "../../../../utils/router";
+import { UserProvider } from "../../../../middleware/UserContext";
+import HeaderAdmin from "../header/header";
+import "./style.scss";
 
 import LoadingSpinner from "../../../../component/general/LoadingSpinner";
 import NotFoundPage from "../../../../component/general/NotFoundPage";
-import ChatbotWrapper from "../../../../component/general/ChatBox";
 
 const AdminLayout = (props) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -18,7 +16,7 @@ const AdminLayout = (props) => {
     const storedRefreshToken = localStorage.getItem("refresh_token");
 
     try {
-      const response = await fetch("http://localhost:3001/api/refresh-token", {
+      const response = await fetch("https://doanpro-production.up.railway.app/api/refresh-token", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -50,7 +48,7 @@ const AdminLayout = (props) => {
           return;
         }
 
-        const response = await fetch("http://localhost:3001/api/check/admin", {
+        const response = await fetch("https://doanpro-production.up.railway.app/api/check/admin", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -64,7 +62,7 @@ const AdminLayout = (props) => {
           }
 
           const retryResponse = await fetch(
-            "http://localhost:3001/api/check/admin",
+            "https://doanpro-production.up.railway.app/api/check/admin",
             {
               headers: {
                 Authorization: `Bearer ${newToken}`

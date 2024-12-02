@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./style.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTERS } from "../../../utils/router";
 import SuccessAnimation from "../../general/Success";
+import "./style.scss";
 
 const UpdateProduct = () => {
   const navigate = useNavigate();
@@ -72,7 +72,7 @@ const UpdateProduct = () => {
       }
 
       const response = await fetch(
-        `http://localhost:3001/api/product/update/${id}`,
+        `https://doanpro-production.up.railway.app/api/product/update/${id}`,
         {
           method: "PUT",
           headers: {

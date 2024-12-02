@@ -1,13 +1,12 @@
-import { memo, useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./style.scss";
+import { memo, useContext, useEffect, useState } from "react";
 import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../../../middleware/UserContext";
+import { ROUTERS } from "../../../../utils/router";
+import ForgetPassword from "../../auth/ForgetPassword";
 import Login from "../../auth/login/Login";
 import SignUp from "../../auth/signup/Signup";
-import { Link } from "react-router-dom";
-import { ROUTERS } from "../../../../utils/router";
-import { UserContext } from "../../../../middleware/UserContext";
-import ForgetPassword from "../../auth/ForgetPassword";
+import "./style.scss";
 
 const Header = () => {
   const { user, countCart, updateCartCount } = useContext(UserContext);
@@ -24,7 +23,7 @@ const Header = () => {
       const id = user.dataUser.id;
       try {
         const response = await fetch(
-          `http://localhost:3001/api/cart/get-cart/${id}`
+          `https://doanpro-production.up.railway.app/api/cart/get-cart/${id}`
         );
         if (!response.ok) throw new Error(response.statusText);
         const dataCart = await response.json();

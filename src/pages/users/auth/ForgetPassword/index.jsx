@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import "./style.scss";
 import { ROUTERS } from "../../../../utils/router";
+import "./style.scss";
 
 const ForgetPassword = ({ isShowVerifyForm, closeVerifyForm }) => {
   const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ const ForgetPassword = ({ isShowVerifyForm, closeVerifyForm }) => {
   const handleForget = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3001/api/user/request-password-reset",
+        "https://doanpro-production.up.railway.app/api/user/request-password-reset",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../../../middleware/UserContext";
-import "../style.scss";
 import { AiOutlineDownCircle } from "react-icons/ai";
 import SuccessAnimation from "../../../../../component/general/Success";
+import { UserContext } from "../../../../../middleware/UserContext";
+import "../style.scss";
 
 const PendingOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -20,7 +20,7 @@ const PendingOrders = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:3001/api/order/getAll/${userId}`
+          `https://doanpro-production.up.railway.app/api/order/getAll/${userId}`
         );
 
         if (!response.ok) {
@@ -46,7 +46,7 @@ const PendingOrders = () => {
   };
   const handleSubmidOrder = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/order/cancel`, {
+      const response = await fetch(`https://doanpro-production.up.railway.app/api/order/cancel`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -65,7 +65,7 @@ const PendingOrders = () => {
       }, 1000);
       const userId = user?.dataUser?.id;
       const updatedOrdersResponse = await fetch(
-        `http://localhost:3001/api/order/getAll/${userId}`
+        `https://doanpro-production.up.railway.app/api/order/getAll/${userId}`
       );
 
       if (!updatedOrdersResponse.ok) {
@@ -159,7 +159,7 @@ const PendingOrders = () => {
                             <td>
                               {" "}
                               {parseInt(item?.productId?.prices) ==
-                              item?.productId?.promotionPrice ? (
+                                item?.productId?.promotionPrice ? (
                                 <div className="grp-price">
                                   <p className="prices">
                                     {`${parseInt(item?.productId?.prices).toLocaleString("vi-VN")} ₫`}
