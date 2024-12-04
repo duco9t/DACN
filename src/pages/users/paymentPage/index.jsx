@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext, useCallback } from "react";
-import { UserContext } from "../../../middleware/UserContext";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../../../middleware/UserContext";
 
-import "./style.scss";
 import LuckyWheelVoucher from "../../../component/general/LuckyWheelVoucher";
 import { apiLink } from "../../../config/api";
+import "./style.scss";
 
 const OrderPage = () => {
   const { pathname } = useLocation();
@@ -171,7 +171,7 @@ const OrderPage = () => {
   useEffect(() => {
     if (!orderId) return;
     const createPayment = async () => {
-      const returnUrl = "http://localhost:3000/ket-qua-thanh-toan";
+      const returnUrl = "https://dacn-production.up.railway.app/ket-qua-thanh-toan";
 
       try {
         const response = await fetch(apiLink + "/api/payments/create_payment", {
@@ -202,10 +202,10 @@ const OrderPage = () => {
   }, [orderId]);
   const totalPrice = dataOrder
     ? dataOrder.products.reduce(
-        (acc, item) =>
-          acc + parseInt(item.productId.promotionPrice) * item.quantity,
-        0
-      )
+      (acc, item) =>
+        acc + parseInt(item.productId.promotionPrice) * item.quantity,
+      0
+    )
     : 0;
   const shippingCost = totalPrice && totalPrice > 50000000 ? 0 : 800000;
   const vat = parseInt(totalPrice ? totalPrice * 0.1 : 0);
@@ -282,8 +282,8 @@ const OrderPage = () => {
           <div className="order-summary">
             <h2>Thông tin đơn hàng</h2>
             {dataOrder &&
-            dataOrder.products &&
-            dataOrder.products.length > 0 ? (
+              dataOrder.products &&
+              dataOrder.products.length > 0 ? (
               <div className="order-container">
                 <table className="order-table">
                   <thead>
@@ -303,7 +303,7 @@ const OrderPage = () => {
                         <td>
                           {" "}
                           {parseInt(item?.productId?.prices) ==
-                          item?.productId?.promotionPrice ? (
+                            item?.productId?.promotionPrice ? (
                             <div className="grp-price">
                               <p className="prices">
                                 {`${parseInt(item?.productId?.prices).toLocaleString("vi-VN")} ₫`}
@@ -451,9 +451,9 @@ const OrderPage = () => {
                       >
                         {voucher
                           ? `${parseInt(
-                              grandTotal -
-                                grandTotal * (parseInt(voucher?.discount) / 100)
-                            ).toLocaleString("vi-VN")} ₫`
+                            grandTotal -
+                            grandTotal * (parseInt(voucher?.discount) / 100)
+                          ).toLocaleString("vi-VN")} ₫`
                           : `${grandTotal.toLocaleString("vi-VN")} ₫`}
                       </td>
                     </tr>
