@@ -15,7 +15,7 @@ const ProductTypeComponent = ({ title, heading }) => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "https://doan-pro.vercel.app/api/product/getAllProduct"
+          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
         const data = await response.json();
@@ -104,7 +104,7 @@ const ProductTypeComponent = ({ title, heading }) => {
     if (!user) alert("Vui lòng đăng nhập");
     try {
       const response = await fetch(
-        "https://doan-pro.vercel.app/api/cart/add-update",
+        "https://doanpro-production.up.railway.app/api/cart/add-update",
         {
           method: "POST",
           headers: {
