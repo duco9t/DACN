@@ -39,7 +39,7 @@ const OrderPage = () => {
     const id = user.dataUser.id;
     try {
       const response = await fetch(
-        ` https://doanpro-production.up.railway.app/api/cart/get-cart/${id}`
+        ` https://doan-pro.vercel.app/api/cart/get-cart/${id}`
       );
       if (!response.ok) throw new Error(response.statusText);
       const data = await response.json();

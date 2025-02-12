@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import "./style.scss";
-import { ROUTERS } from "../../../utils/router";
-import { UserContext } from "../../../middleware/UserContext";
+import { useContext, useEffect, useState } from "react";
 import { BsStarFill } from "react-icons/bs";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../../middleware/UserContext";
+import { ROUTERS } from "../../../utils/router";
+import "./style.scss";
 const ProductTypeComponent = ({ title, heading }) => {
   const [products, setProducts] = useState([]);
   const { user, updateCartCount } = useContext(UserContext);
@@ -15,7 +15,7 @@ const ProductTypeComponent = ({ title, heading }) => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "https://doanpro-production.up.railway.app/api/product/getAllProduct"
+          "https://doan-pro.vercel.app/api/product/getAllProduct"
         );
         if (!response.ok) throw new Error(response.statusText);
         const data = await response.json();
@@ -104,7 +104,7 @@ const ProductTypeComponent = ({ title, heading }) => {
     if (!user) alert("Vui lòng đăng nhập");
     try {
       const response = await fetch(
-        "https://doanpro-production.up.railway.app/api/cart/add-update",
+        "https://doan-pro.vercel.app/api/cart/add-update",
         {
           method: "POST",
           headers: {
