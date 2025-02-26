@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { ROUTERS } from "./utils/router";
+import { useState, useEffect } from "react";
 
 import HomePage from "./pages/users/homePage";
 import MasterLayout from "./pages/users/theme/masterLayout";
@@ -38,111 +39,127 @@ import NotFoundPage from "./component/general/NotFoundPage/index.jsx";
 import PaymentDetailPage from "./pages/users/PaymentDetailPage/index.jsx";
 import AddReview from "./pages/users/AddReview/index.jsx";
 import CreateVoucher from "./component/admin/CreateVoucher/index.jsx";
+import Popup from "./component/general/Popup.jsx"; // Import Popup component
 
 const RouterCustom = () => {
+  const [showPopup, setShowPopup] = useState(true); // State để điều khiển hiển thị popup
+
+  useEffect(() => {
+    // Logic để hiển thị popup khi người dùng truy cập hoặc reload lại trang
+    setShowPopup(true);
+  }, []);
+
   return (
-    <Routes>
-      <Route path={ROUTERS.NOTFOUND} element={<NotFoundPage />} />
+    <>
+      {showPopup && (
+        <Popup onClose={() => setShowPopup(false)}>
+          <p className="blinking-text"><strong>Xin vui lòng đọc hết dòng này</strong></p>
+          <p className="text-2">Đây là sản phẩm thuộc dự án Đồ Án Chuyên Ngành Công Nghệ Thông Tin Khóa 2022 Nhóm 10. Học viện Hàng không Việt Nam. Đây chỉ là dự án thử nghiệm, không có mua bán chính thức trên trang này. Trân trọng!</p>
+        </Popup>
+      )}
+      <Routes>
+        <Route path={ROUTERS.NOTFOUND} element={<NotFoundPage />} />
 
-      <Route element={<AdminLayout />}>
-        <Route path={ROUTERS.ADMIN.DASHBOARD} element={<Dashboard />} />
-        <Route
-          path={ROUTERS.ADMIN.PRODUCT_LIST}
-          element={<ProductListAdmin />}
-        />
-        <Route
-          path={ROUTERS.ADMIN.MANAGE_STAFF}
-          element={<ManageStaffAdmin />}
-        />
-        <Route
-          path={ROUTERS.ADMIN.MANAGE_VOURCHER}
-          element={<CreateVoucher />}
-        />
-        <Route
-          path={ROUTERS.ADMIN.MANAGE_PRODUCTS}
-          element={<ManageProductsAdmin />}
-        />
-        <Route
-          path={ROUTERS.ADMIN.CREATE_PRODUCT}
-          element={<CreateProductAdmin />}
-        />
-        <Route
-          path={ROUTERS.ADMIN.REVENUE_STATS}
-          element={<RevenueStatistics />}
-        />
-        <Route
-          path={ROUTERS.ADMIN.MANAGER_ORDER}
-          element={<OrderManagementAdmin />}
-        />
-        <Route
-          path={ROUTERS.ADMIN.PURCHASE_HISTORY}
-          element={<PurchaseHistoryAdmin />}
-        />
-        <Route
-          path={`${ROUTERS.ADMIN.UPDATE_USER}/:id`}
-          element={<UpdateUser />}
-        />
-        <Route
-          path={`${ROUTERS.ADMIN.PRODUCTS_DETAIL}/:id`}
-          element={<ProductDetail />}
-        />
-        <Route path={ROUTERS.ADMIN.DELETE_USER} element={<DeleteUser />} />
-        <Route
-          path={`${ROUTERS.ADMIN.UPDATE_PRODUCT}/:id`}
-          element={<UpdateProduct />}
-        />
-      </Route>
+        <Route element={<AdminLayout />}>
+          <Route path={ROUTERS.ADMIN.DASHBOARD} element={<Dashboard />} />
+          <Route
+            path={ROUTERS.ADMIN.PRODUCT_LIST}
+            element={<ProductListAdmin />}
+          />
+          <Route
+            path={ROUTERS.ADMIN.MANAGE_STAFF}
+            element={<ManageStaffAdmin />}
+          />
+          <Route
+            path={ROUTERS.ADMIN.MANAGE_VOURCHER}
+            element={<CreateVoucher />}
+          />
+          <Route
+            path={ROUTERS.ADMIN.MANAGE_PRODUCTS}
+            element={<ManageProductsAdmin />}
+          />
+          <Route
+            path={ROUTERS.ADMIN.CREATE_PRODUCT}
+            element={<CreateProductAdmin />}
+          />
+          <Route
+            path={ROUTERS.ADMIN.REVENUE_STATS}
+            element={<RevenueStatistics />}
+          />
+          <Route
+            path={ROUTERS.ADMIN.MANAGER_ORDER}
+            element={<OrderManagementAdmin />}
+          />
+          <Route
+            path={ROUTERS.ADMIN.PURCHASE_HISTORY}
+            element={<PurchaseHistoryAdmin />}
+          />
+          <Route
+            path={`${ROUTERS.ADMIN.UPDATE_USER}/:id`}
+            element={<UpdateUser />}
+          />
+          <Route
+            path={`${ROUTERS.ADMIN.PRODUCTS_DETAIL}/:id`}
+            element={<ProductDetail />}
+          />
+          <Route path={ROUTERS.ADMIN.DELETE_USER} element={<DeleteUser />} />
+          <Route
+            path={`${ROUTERS.ADMIN.UPDATE_PRODUCT}/:id`}
+            element={<UpdateProduct />}
+          />
+        </Route>
 
-      <Route element={<MasterLayout />}>
-        <Route path={ROUTERS.USER.HOME} element={<HomePage />} />
-        <Route path={ROUTERS.USER.PRODUCTS} element={<ProductPage />} />
-        <Route path={ROUTERS.USER.CONTACTS} element={<ContactPage />} />
-        <Route path={ROUTERS.USER.ORDERLOOKUP} element={<OrderLookup />} />
-        <Route
-          path={ROUTERS.USER.PAYMENT_DETAIL}
-          element={<PaymentDetailPage />}
-        />
+        <Route element={<MasterLayout />}>
+          <Route path={ROUTERS.USER.HOME} element={<HomePage />} />
+          <Route path={ROUTERS.USER.PRODUCTS} element={<ProductPage />} />
+          <Route path={ROUTERS.USER.CONTACTS} element={<ContactPage />} />
+          <Route path={ROUTERS.USER.ORDERLOOKUP} element={<OrderLookup />} />
+          <Route
+            path={ROUTERS.USER.PAYMENT_DETAIL}
+            element={<PaymentDetailPage />}
+          />
 
-        <Route path={ROUTERS.USER.ADD_REVIEW} element={<AddReview />} />
-        <Route path={ROUTERS.USER.ORDER_STORAGE} element={<OrderStorage />} />
-        <Route
-          path={`${ROUTERS.USER.DETAILS}/:id`}
-          element={<ProductDetailsPage />}
-        />
-        <Route path={`${ROUTERS.USER.CART}/:id`} element={<CartPage />} />
-        <Route path={ROUTERS.USER.LOGIN} element={<LoginPage />} />
-        <Route path={ROUTERS.USER.VERITYOTP} element={<VerifyOtp />} />
-        <Route path={ROUTERS.USER.SIGNUP} element={<SignUpPage />} />
-        <Route path={ROUTERS.USER.ORDER_DETAIL} element={<OrderPage />} />
-        <Route
-          path={`${ROUTERS.USER.PRODUCT_TYPE}/:id`}
-          element={<ProductType />}
-        />
-      </Route>
+          <Route path={ROUTERS.USER.ADD_REVIEW} element={<AddReview />} />
+          <Route path={ROUTERS.USER.ORDER_STORAGE} element={<OrderStorage />} />
+          <Route
+            path={`${ROUTERS.USER.DETAILS}/:id`}
+            element={<ProductDetailsPage />}
+          />
+          <Route path={`${ROUTERS.USER.CART}/:id`} element={<CartPage />} />
+          <Route path={ROUTERS.USER.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTERS.USER.VERITYOTP} element={<VerifyOtp />} />
+          <Route path={ROUTERS.USER.SIGNUP} element={<SignUpPage />} />
+          <Route path={ROUTERS.USER.ORDER_DETAIL} element={<OrderPage />} />
+          <Route
+            path={`${ROUTERS.USER.PRODUCT_TYPE}/:id`}
+            element={<ProductType />}
+          />
+        </Route>
 
-      <Route element={<ProfilePageLayout />}>
-        <Route
-          path={ROUTERS.USERPROFILE.ACCOUNT_INFO}
-          element={<AccountInfo />}
-        />
-        <Route
-          path={ROUTERS.USERPROFILE.ORDER_MANAGERMENT}
-          element={<OrderManagement />}
-        />
-        <Route
-          path={ROUTERS.USER.CHANGEPASSWORD}
-          element={<ChangePassword />}
-        />
-        <Route
-          path={ROUTERS.USERPROFILE.VIEW_PRODUCTS}
-          element={<ViewedProducts />}
-        />
-        <Route
-          path={ROUTERS.USERPROFILE.ADDRESS_BOOK}
-          element={<AddressBook />}
-        />
-      </Route>
-    </Routes>
+        <Route element={<ProfilePageLayout />}>
+          <Route
+            path={ROUTERS.USERPROFILE.ACCOUNT_INFO}
+            element={<AccountInfo />}
+          />
+          <Route
+            path={ROUTERS.USERPROFILE.ORDER_MANAGERMENT}
+            element={<OrderManagement />}
+          />
+          <Route
+            path={ROUTERS.USER.CHANGEPASSWORD}
+            element={<ChangePassword />}
+          />
+          <Route
+            path={ROUTERS.USERPROFILE.VIEW_PRODUCTS}
+            element={<ViewedProducts />}
+          />
+          <Route
+            path={ROUTERS.USERPROFILE.ADDRESS_BOOK}
+            element={<AddressBook />}
+          />
+        </Route>
+      </Routes>
+    </>
   );
 };
 

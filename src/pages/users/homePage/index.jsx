@@ -1,8 +1,8 @@
-import { memo, useState, useEffect } from "react";
-import "./style.scss";
+import { memo, useEffect, useState } from "react";
 import { AiOutlinePhone } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTERS } from "../../../utils/router";
+import "./style.scss";
 
 import SlideBanner from "../../../component/user/slideBaner";
 
@@ -54,7 +54,7 @@ const HomePage = () => {
     script1.async = true;
     script1.src = "https://www.googletagmanager.com/gtag/js?id=AW-16850404656";
     document.head.appendChild(script1);
-  
+
     const script2 = document.createElement("script");
     script2.innerHTML = `
       window.dataLayer = window.dataLayer || [];
@@ -212,7 +212,7 @@ const HomePage = () => {
                 />
                 <ProductTypeComponent
                   title="laptopsinhvien"
-                  heading="Laptop sinhh viên "
+                  heading="Laptop sinh viên"
                 />
                 <ProductTypeComponent
                   title="laptopgaming"
