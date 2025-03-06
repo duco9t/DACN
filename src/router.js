@@ -60,6 +60,7 @@ const RouterCustom = () => {
       <Routes>
         <Route path={ROUTERS.NOTFOUND} element={<NotFoundPage />} />
 
+
         <Route element={<AdminLayout />}>
           <Route path={ROUTERS.ADMIN.DASHBOARD} element={<Dashboard />} />
           <Route
@@ -122,7 +123,7 @@ const RouterCustom = () => {
           <Route path={ROUTERS.USER.ADD_REVIEW} element={<AddReview />} />
           <Route path={ROUTERS.USER.ORDER_STORAGE} element={<OrderStorage />} />
           <Route
-            path={`${ROUTERS.USER.DETAILS}/:id`}
+            path={`${ROUTERS.USER.DETAILS}/:productId`}
             element={<ProductDetailsPage />}
           />
           <Route path={`${ROUTERS.USER.CART}/:id`} element={<CartPage />} />

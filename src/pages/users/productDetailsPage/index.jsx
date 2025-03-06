@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useContext, useEffect, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../../../middleware/UserContext";
 import Notification, {
   NotificationContainer
@@ -14,53 +14,44 @@ import HistoriesProductSlide from "../../../component/user/historiesProdcutSlide
 import { apiLink } from "../../../config/api";
 
 const ProductDetailsPage = () => {
-  const location = useLocation();
-
-  const { pathname } = useLocation();
-
-  const { productId } = location.state || {};
-
+  const { productId } = useParams();
   const { user, updateCartCount } = useContext(UserContext) || {};
   const { notifications, addNotification } = NotificationContainer();
-
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState(null);
 
   const addToHistory = (product) => {
     if (!product) return;
-
     let history = JSON.parse(localStorage.getItem("viewedProducts")) || [];
     history = history.filter((item) => item._id !== product._id);
     history.unshift({
       _id: product._id,
       name: product.name,
       imageUrl: product.imageUrl,
-      prices: product.prices
+      prices: product.prices,
     });
     history = history.slice(0, 10);
     localStorage.setItem("viewedProducts", JSON.stringify(history));
   };
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
+    if (!productId) return;
     try {
-      const response = await fetch(
-        apiLink + `/api/product/get-details/${productId}`
-      );
+      const response = await fetch(`${apiLink}/api/product/get-details/${productId}`);
       if (!response.ok) {
         throw new Error("Failed to fetch product-details");
       }
       const data = await response.json();
-
       setProduct(data?.data);
-
       addToHistory(data?.data);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [productId]);
+
   useEffect(() => {
     fetchProducts();
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [fetchProducts]);
 
   const handleAddToCart = async () => {
     if (!user) {
@@ -69,27 +60,21 @@ const ProductDetailsPage = () => {
     }
 
     try {
-      const response = await fetch(apiLink + "/api/cart/add-update", {
+      const response = await fetch(`${apiLink}/api/cart/add-update`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId: user.dataUser.id,
           productId: product._id,
           quantity: 1,
-          prices: product.prices.toLocaleString("vi-VN")
-        })
+          prices: product.prices.toLocaleString("vi-VN"),
+        }),
       });
+      if (!response.ok) throw new Error(response.statusText);
 
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
       addNotification("Thêm giỏ hàng thành công!");
       const dataCart = await response.json();
-      const updatedCount = dataCart.data.products.length;
-
-      updateCartCount(updatedCount);
+      updateCartCount(dataCart.data.products.length);
     } catch (error) {
       console.error("Failed to add product to cart:", error);
     }
